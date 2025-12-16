@@ -1,33 +1,13 @@
-"""
-解题：针对DES算法的每一个S盒，计算随机变量 X₂ ⊕ Y₁ ⊕ Y₂ ⊕ Y₃ ⊕ Y₄ 的偏差
-
-线性密码分析中的偏差(bias)定义：
-- 对于线性近似表达式 a·X ⊕ b·Y = 0
-- 偏差 ε = |Pr(表达式=0) - 1/2|
-- 或者 ε = |满足条件的数量 - 32| / 64（因为6位输入有64种可能）
-
-在本题中：
-- X = (X₁, X₂, X₃, X₄, X₅, X₆) 是S盒的6位输入
-- Y = (Y₁, Y₂, Y₃, Y₄) 是S盒的4位输出
-- 需要计算 X₂ ⊕ Y₁ ⊕ Y₂ ⊕ Y₃ ⊕ Y₄ 的偏差
-"""
-
 from s_box_sub import S_BOXES
 
 
 def get_bit(value, position, total_bits):
-    """
-    获取数值中指定位置的比特值
-    position从1开始计数，从左到右（高位到低位）
-    """
     bit_index = total_bits - position
     return (value >> bit_index) & 1
 
 
 def calculate_bias_for_sbox(sbox_index, verbose=False):
-    """
-    计算第 sbox_index 个S盒的 X₂ ⊕ Y₁ ⊕ Y₂ ⊕ Y₃ ⊕ Y₄ 的偏差
-    """
+    
     sbox = S_BOXES[sbox_index]
     count_zero = 0
     
